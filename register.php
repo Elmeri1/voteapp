@@ -12,11 +12,11 @@
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+        <label for="password" class="form-label mt-4">Password</label>
         <input name="password" type="password" class="form-control" id="passwd" placeholder="Password">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1" class="form-label mt-4">Confirm password</label>
+        <label for="password" class="form-label mt-4">Confirm password</label>
         <input name="confirmPassword" type="password" class="form-control" id="confirm" placeholder="Password">
       </div>
       <div class="form-group">
