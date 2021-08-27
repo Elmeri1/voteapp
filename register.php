@@ -13,7 +13,11 @@
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input name="password" type="password" class="form-control" id="passwd" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="form-label mt-4">Confirm password</label>
+        <input name="confirmPassword" type="password" class="form-control" id="confirm" placeholder="Password">
       </div>
       <div class="form-group">
         <label for="formFile" class="form-label mt-4">Default file input example</label>
