@@ -27,4 +27,12 @@ function registerNewUser(event){
 
     console.log('Registering new user')
 
+    let ajax = new XMLHttpRequest();
+    ajax.onload = function(){
+        console.log(ajax.responseText);
+    }
+    ajax.open("GET", "backend/registerNewUser.php", true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  
+    ajax.send("username="+username+"&password="+password);
+
 }

@@ -7,9 +7,8 @@
     <fieldset>
       <legend>Register</legend>
       <div class="form-group">
-        <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="username" class="form-label mt-4">Username</label>
+        <input name="username" type="username" class="form-control" id="name" placeholder="Enter username">
       </div>
       <div class="form-group">
         <label for="password" class="form-label mt-4">Password</label>
@@ -29,6 +28,6 @@
 
 </div>
 
-  <script scr="js/register.js"></script>
+  <script src="js/register.js"></script>
 
         <?php include_once 'layout/bottom.inc.php'; ?>
