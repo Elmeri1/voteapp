@@ -10,6 +10,11 @@ $password = $_POST['password'];
 
 include_once 'pdo-connect.php';
 
-$stmt = $conn->prepare("")
-
-echo 'tallennettu'; 
+$stmt = $conn->prepare("INSERT INTO user (username, pwd) VALUES (:username, :pwd);");
+$stmt->bindParam(':username', $username);
+$stmt->bindParam(':pwd', $username);
+if($stmt->execute() == false){
+    echo 'tallennus epäonnistui';
+} else {
+    echo 'tallennettu'; 
+}
