@@ -3,13 +3,18 @@
 
 <div class="container"></div>
 
+<div id="msg" class="alert alert-dismissible alert-warning d-none">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <h4 class="alert-heading">Warning!</h4>
+  <p class="mb-0"></a>.</p>
+</div>
+
 <form>
     <fieldset>
       <legend>Login</legend>
       <div class="form-group">
-        <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="username" class="form-label mt-4">Username</label>
+        <input name="username" type="username" class="form-control" id="name" placeholder="Enter username">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
@@ -19,4 +24,8 @@
     </fieldset>
   </form>
 </div>
-        <?php include_once 'layout/bottom.inc.php'; ?>
+
+<script src="js/common.js"></script>
+<script src="js/login.js"></script>
+
+<?php include_once 'layout/bottom.inc.php'; ?>

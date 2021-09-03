@@ -36,5 +36,6 @@
 </div>
 
   <script src="js/register.js"></script>
+  <script src="js/common.js"></script>
 
         <?php include_once 'layout/bottom.inc.php'; ?>

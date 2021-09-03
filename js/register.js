@@ -31,7 +31,7 @@ function registerNewUser(event){
     ajax.onload = function(){
         const data = JSON.parse(this.responseText);
         if (data.hasOwnProperty('success')) {
-            window.open('login.php');
+            window.location.href = "login.php?type=success&msg=Rekisteröityminen onnistui";
         } else {
             showMessage('error',data.error);
         }
@@ -40,20 +40,4 @@ function registerNewUser(event){
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  
     ajax.send("username="+username+"&password="+password);
 
-}
-
-function showMessage(type, msg){
-
-    let msgBox = document.getElementById("msg");
-
-    if (type == 'succes') {
-        msgBox.classList.remove('alert-danger');
-        msgBox.classList.add('alert-success');
-    } else if(type == 'warning') {
-        msgBox.classList.remove('alert-success');
-        msgBox.classList.add('alert-danger');
-    }
-
-    msgBox.querySelector('p').innerHTML = msg;
-    msgBox.classList.remove('d-none');
 }
