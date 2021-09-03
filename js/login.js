@@ -8,4 +8,5 @@ if (urlParams.has('msg') && urlParams.has('type')) {
 
     showMessage(type, msg);
 }
-
+// Login-button
+document.forms['login'].addEventListener('submit', loginUser)
