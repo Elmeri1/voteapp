@@ -35,7 +35,7 @@ function loginUser(event){
         }
             showMessage('error','kirjautimnen epäonnistui');
         }
-        ajaxopen("POST","backend/loginUser.php", true);
+        ajax.open("POST","backend/loginUser.php", true);
         ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         ajax.send(`username=${username}&password=${password}`);
 
