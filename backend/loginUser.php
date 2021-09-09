@@ -20,10 +20,11 @@ try{
             'error' => 'tapahtui virhe tallennuksessa'
         );
     } else {
-        $result = $
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $result;
 
-        $data = array(
-            'success' => 'onnistui'
+        // $data = array(
+        //     'success' => 'onnistui'
         );
     }
 } catch (PDOException $e) {

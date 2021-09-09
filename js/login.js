@@ -29,11 +29,13 @@ function loginUser(event){
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         const data = JSON.parse(this.responseText);
-        if (data.hasOwnProperty('succes')){
-            window.location.href = "index.php?type=success&msg=welcome";
-            return;
-        }
-            showMessage('error','kirjautimnen epäonnistui');
+        console.log(data);
+        // if (data.hasOwnProperty('succes')){
+        //     window.location.href = "index.php?type=success&msg=welcome";
+        //     return;
+        // } else {
+        //     showMessage('error','kirjautimnen epäonnistui');
+        //     }
         }
         ajax.open("POST","backend/loginUser.php", true);
         ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
