@@ -21,11 +21,16 @@ try{
         );
     } else {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $data = $result;
 
-        // $data = array(
-        //     'success' => 'onnistui'
-        );
+        if (password_verify($password, $result['pwd'])) {
+            $data = array(
+                'success' => 'onnistui'
+            );
+        } else {
+            $data = array(
+                'error' => 'salasana on väärä!'
+            );
+        }
     }
 } catch (PDOException $e) {
 
