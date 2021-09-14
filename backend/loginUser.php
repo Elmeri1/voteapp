@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 if (!isset($_POST['username']) || !isset($_POST['password'])){
     $data = array(
         'error' => 'POST_dataa ei saatavilla'
@@ -26,6 +29,11 @@ try{
             $data = array(
                 'success' => 'onnistui'
             );
+
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $result['id'];
+            $_SESSION['user_name'] = $result['username'];
+
         } else {
             $data = array(
                 'error' => 'salasana on väärä!'

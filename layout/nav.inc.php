@@ -12,14 +12,17 @@
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
+              <?php if (isset($_SESSION['logged_in'])): ?>
               <li class="nav-item">
                 <a class="nav-link" href="register.php">Register</a>
               </li>
+              <?php else: ?>
               <li class="nav-item">
                 <a class="nav-link" href="login.php">Login</a>
               </li>
+              <?php endif; ?>
               <li class="nav-item">
-                <a class="nav-link" href="#">New poll</a>
+                <a class="nav-link" href="newpoll.php">New poll</a>
               </li>
             </ul>
           </div>
