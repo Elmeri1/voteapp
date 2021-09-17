@@ -29,12 +29,12 @@
       <h4>Poll options</h4> <button id="addOption">Add option</button>
       <div class="form-group">
         <label for="option1" class="form-label mt-4">Option 1</label>
-        <input name="option1" type="username" class="form-control" id="name" placeholder="Option 1">
+        <input name="option1" type="username" class="form-control" placeholder="Option 1">
       </div>
 
       <div class="form-group">
         <label for="option1" class="form-label mt-4">Option 2</label>
-        <input name="option2" type="username" class="form-control" id="name" placeholder="Option 2">
+        <input name="option2" type="username" class="form-control" placeholder="Option 2">
       </div>
 
     <!-- Additional options go here -->
@@ -43,8 +43,8 @@
         <label for="formFile" class="form-label mt-4">Default file input example</label>
         <input class="form-control" type="file" id="formFile">
       </div> -->
-      <button type="submit" class="btn btn-primary">Save poll</button>
     </fieldset>
+    <button type="submit" class="btn btn-primary">Save poll</button>
   </form>
 
 </div>
