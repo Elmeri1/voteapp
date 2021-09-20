@@ -2,6 +2,11 @@ let optionCount = 2;
 
 document.getElementById('addOption').addEventListener('click', addNewOption);
 document.getElementById('deleteLastOption').addEventListener('click', deleteLastOption);
+document.forms['newPoll'].addEventListener('submit', createNewPoll);
+
+function createNewPoll(event){
+    event.preventDefault();
+}
 
 function deleteLastOption(event){
 
