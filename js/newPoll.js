@@ -1,6 +1,23 @@
 let optionCount = 2;
 
 document.getElementById('addOption').addEventListener('click', addNewOption);
+document.getElementById('deleteLastOption').addEventListener('click', deleteLastOption);
+
+function deleteLastOption(event){
+
+    event.preventDefault();
+
+    if (optionCount <= 2 ) {
+        return;
+    }
+
+    const optionToDelete = document.querySelector('fieldset').lastElementChild;
+    const parentElement = document.querySelector('fieldset');
+    parentElement.removeChild(optionToDelete);
+
+    optionCount--;
+
+}
 
 function addNewOption(event){
 
@@ -10,15 +27,17 @@ function addNewOption(event){
 
     // crete new div
     const div = document.createElement('div');
-    div.classList.add =('form-group');
+    div.classList.add('form-group');
 
     // create new label
     const label = document.createElement('label');
     const forAttribute = document.createAttribute('for');
-    const labelText = document.createTextNode(`option3${optionCount}`);
-    forAttribute.value = `option3${optionCount}`;
+    const labelText = document.createTextNode(`Option${optionCount}`);
+    forAttribute.value = `Option${optionCount}`;
     label.setAttributeNode(forAttribute);
     label.appendChild(labelText);
+    label.classList.add('form-label');
+    label.classList.add('mt-4');
 
     // create new input
     const input = document.createElement('input');
@@ -30,11 +49,11 @@ function addNewOption(event){
     input.setAttributeNode(inputType);
 
     const inputName = document.createAttribute('name');
-    inputName.value = `option${optionCount}`;
+    inputName.value = `Option${optionCount}`;
     input.setAttributeNode(inputName);
 
     const inputPlaceHolder = document.createAttribute('placeholder');
-    inputPlaceHolder.value = `option3${optionCount}`;
+    inputPlaceHolder.value = `Option${optionCount}`;
     input.setAttributeNode(inputPlaceHolder);
     
     div.appendChild(label);
