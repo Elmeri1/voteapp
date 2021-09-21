@@ -8,10 +8,45 @@ function createNewPoll(event){
     event.preventDefault();
     console.log('save new poll');
 
-    const topic = document.forms['newPoll']['topic'];
-    const start = document.forms['newPoll']['start'];
-    const stop = document.forms['newPoll']['stop'];
+    const topic = document.forms['newPoll']['topic'].value;
+    const start = document.forms['newPoll']['start'].value;
+    const stop = document.forms['newPoll']['stop'].value;
 
+    const options = [];
+
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach(function(input){
+        if (input.name.indexOf('option') == 0){
+            options.push(input.value);
+        }
+    })
+    // Tarkastetaan että aihe ja kaski optionia on annettu
+    if (topic.length <= 0 || options[0].length <= 0 || options[1].length <= 0){
+        showMessage('error','"Topic and at least two options must be set!"');
+        return;
+    }
+
+    let postData = `topic=${topic}&start=${start}&stop=${stop}`;
+    let i = 0;
+    options.forEach(function(option){
+        postData += `&option${i++}=${option}`
+    })
+
+    console.log(postData);
+
+    let ajax = new XMLHttpRequest();
+    ajax.onload = function(){
+        const data = JSON.parse(this.responseText);
+        if (data.hasOwnProperty('success')) {
+            alert('onnistui');
+        } else {
+            showMessage('error',data.error);
+        }
+    }
+    ajax.open("POST", "backend/CreateNewPoll.php", true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  
+    ajax.send(postData);
 }
 
 function deleteLastOption(event){
