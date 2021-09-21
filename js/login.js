@@ -20,7 +20,7 @@ function loginUser(event){
     ajax.onload = function(){
         const data = JSON.parse(this.responseText);
         console.log(data);
-        if (data.hasOwnProperty('succes')){
+        if (data.hasOwnProperty('success')){
             window.location.href = "index.php?type=success&msg=welcome";
             return;
         } else {

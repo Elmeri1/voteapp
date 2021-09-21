@@ -12,7 +12,7 @@ function showMessage(type, msg){
 
     let msgBox = document.getElementById("msg");
 
-    if (type == 'succes') {
+    if (type == 'success') {
         msgBox.classList.remove('alert-warning');
         msgBox.classList.remove('alert-danger');
         msgBox.classList.add('alert-success');

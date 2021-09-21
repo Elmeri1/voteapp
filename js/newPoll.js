@@ -6,6 +6,12 @@ document.forms['newPoll'].addEventListener('submit', createNewPoll);
 
 function createNewPoll(event){
     event.preventDefault();
+    console.log('save new poll');
+
+    const topic = document.forms['newPoll']['topic'];
+    const start = document.forms['newPoll']['start'];
+    const stop = document.forms['newPoll']['stop'];
+
 }
 
 function deleteLastOption(event){

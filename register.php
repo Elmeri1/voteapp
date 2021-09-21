@@ -1,7 +1,7 @@
 <?php include_once 'layout/top.inc.php'; ?>
 <?php include_once 'layout/nav.inc.php'; ?>
 
-<div class="container"></div>
+<div class="container">
 
 <div id="msg" class="alert alert-dismissible alert-warning d-none">
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -38,4 +38,4 @@
   <script src="js/register.js"></script>
   <script src="js/common.js"></script>
 
-        <?php include_once 'layout/bottom.inc.php'; ?>
+<?php include_once 'layout/bottom.inc.php'; ?>
