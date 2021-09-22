@@ -23,15 +23,15 @@ if (!isset($_SESSION['logged_in'])){
         <legend>Create new poll</legend>
         <div class="form-group">
           <label for="topic" class="form-label mt-4">Topic</label>
-          <input name="topic" type="username" class="form-control" id="name" placeholder="topic">
+          <input name="topic" type="username" class="form-control" placeholder="topic">
         </div>
         <div class="form-group">
           <label for="start" class="form-label mt-4">Start</label>
-          <input name="start" type="date" class="form-control" id="passwd" placeholder="Password">
+          <input name="start" type="date" class="form-control">
         </div>
         <div class="form-group">
-          <label for="stop" class="form-label mt-4">Stop</label>
-          <input name="stop" type="date" class="form-control" id="confirm" placeholder="Password">
+          <label for="end" class="form-label mt-4">End</label>
+          <input name="end" type="date" class="form-control">
         </div>
 
         <h4>Poll options</h4> <button class="btn btn-primary" id="addOption">Add option</button>

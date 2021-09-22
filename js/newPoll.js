@@ -10,7 +10,7 @@ function createNewPoll(event){
 
     const topic = document.forms['newPoll']['topic'].value;
     const start = document.forms['newPoll']['start'].value;
-    const stop = document.forms['newPoll']['stop'].value;
+    const stop = document.forms['newPoll']['end'].value;
 
     const options = [];
 
@@ -27,7 +27,7 @@ function createNewPoll(event){
         return;
     }
 
-    let postData = `topic=${topic}&start=${start}&stop=${stop}`;
+    let postData = `topic=${topic}&start=${start}&end=${stop}`;
     let i = 0;
     options.forEach(function(option){
         postData += `&option${i++}=${option}`

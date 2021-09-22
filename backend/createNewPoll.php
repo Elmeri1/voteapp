@@ -1,4 +1,11 @@
 <?php 
+session_start();
+if (!isset($_SESSION['user_id'])){
+    $data = array(
+        'error' => 'You are not allowed here'
+    );
+    die();
+}
 
 if (!isset($_POST['topic']) || !isset($_POST['option1'])){
     $data = array(
@@ -7,38 +14,66 @@ if (!isset($_POST['topic']) || !isset($_POST['option1'])){
     die();
 }
 
+// Valmistllaan muuttujat
+$topic = $_POST['topic'];
+$start = $_POST['start'];
+$end = $_POST['end'];
+$user_id = $_SESSION['user_id'];
+
 include_once 'pdo-connect.php';
 
+$options = array();
+
+foreach ($_POST as $key => $value) {
+    if (strpos($key, 'option') == 0) {
+        $options[] = $value;
+    }
+}
+
 try{
-    $stmt = $conn->prepare("INSERT INTO vote (topic, start, end, user_id) 
+    $stmt = $conn->prepare("INSERT INTO poll (topic, start, end, user_id) 
                             VALUES (:topic, :start, :end, :user_id);");
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':pwd', $password);
+    $stmt->bindParam(':topic', $topic);
+    $stmt->bindParam(':start', $start);
+    $stmt->bindParam(':end', $end);
+    $stmt->bindParam(':user_id', $user_id);
+
     if($stmt->execute() == false){
         $data = array(
-            'error' => 'tapahtui virhe tallennuksessa'
+            'error' => 'Error'
         );
     } else {
         $data = array(
-            'success' => 'Uusi käyttäjä on tallennettu'
+            'success' => 'New vote inserted'
         );
     }
 } catch (PDOException $e) {
-    if (strpos($e->getMessage(), '1062 Duplicate entry ')){
-        $data = array(
-            'error' => 'Käyttäjä on jo olemassa'
-        );
-    } else {
-        $data = array(
-            'error' => 'tapahtui virhe tallennuksessa'
-        );
-    }
-
+    $data = array(
+        'error' => $e->getMessage()
+    );
 }
 
-$data = array(
-    'success' => 'Uusi käyttäjä on tallennettu'
-);
+// jos äänestyksen lisääminen onnistui, niin lisätään myös vaihtoehdot
+
+// try{
+//     $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:topic, :poll_id)";
+//     $stmt->bindParam(':topic', $topic);
+//     $stmt->bindParam(':poll_id', $poll_id);
+
+//     if($stmt->execute() == false){
+//         $data = array(
+//             'error' => 'Error'
+//         );
+//     } else {
+//         $data = array(
+//             'success' => 'New vote inserted'
+//         );
+//     }
+// } catch (PDOException $e) {
+//     $data = array(
+//         'error' => $e->getMessage()
+//     );
+// }
 
 header("Content-type: application/json;charset=utf-8");
 echo json_encode($data);
