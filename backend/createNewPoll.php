@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])){
     );
     die();
 }
-
+// Tarkastetaan ensin onko post dataa
 if (!isset($_POST['topic']) || !isset($_POST['option1'])){
     $data = array(
         'error' => 'POST_dataa ei saatavilla'
@@ -21,16 +21,9 @@ $end = $_POST['end'];
 $user_id = $_SESSION['user_id'];
 
 include_once 'pdo-connect.php';
-
-$options = array();
-
-foreach ($_POST as $key => $value) {
-    if (strpos($key, 'option') == 0) {
-        $options[] = $value;
-    }
-}
-
+// Lisätään äänestys kantaan
 try{
+    // Luodaan pdo-statement
     $stmt = $conn->prepare("INSERT INTO poll (topic, start, end, user_id) 
                             VALUES (:topic, :start, :end, :user_id);");
     $stmt->bindParam(':topic', $topic);
@@ -55,25 +48,41 @@ try{
 
 // jos äänestyksen lisääminen onnistui, niin lisätään myös vaihtoehdot
 
-// try{
-//     $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:topic, :poll_id)";
-//     $stmt->bindParam(':topic', $topic);
-//     $stmt->bindParam(':poll_id', $poll_id);
+// Valmistellaan vaihtoehdot array-rakenteeseen
+$options = array();
 
-//     if($stmt->execute() == false){
-//         $data = array(
-//             'error' => 'Error'
-//         );
-//     } else {
-//         $data = array(
-//             'success' => 'New vote inserted'
-//         );
-//     }
-// } catch (PDOException $e) {
-//     $data = array(
-//         'error' => $e->getMessage()
-//     );
-// }
+foreach ($_POST as $key => $value) {
+    if (substr($key, 0, 6) == 'option') {
+        $options[] = $value;
+    }
+}
+// Haetaan edellisen insertin id
+$poll_id = $conn->lastInsertId();
+
+try{
+    // Tallenetaan kaikki vaihtoehdot
+    foreach($options as $option){
+        // Luodaan pdo statement
+        $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:topic, :poll_id)");
+        $stmt->bindParam(':name', $topic);
+        $stmt->bindParam(':poll_id', $poll_id);
+    
+        if($stmt->execute() == false){
+            $data = array(
+                'error' => 'Error'
+            );
+        } else {
+            $data = array(
+                'success' => 'New vote inserted'
+            );
+        }
+        }
+    } 
+    catch (PDOException $e) {
+        $data = array(
+            'error' => $e->getMessage()
+        );
+    }
 
 header("Content-type: application/json;charset=utf-8");
 echo json_encode($data);

@@ -45,8 +45,8 @@ try{
         $data = array(
             'error' => 'tapahtui virhe tallennuksessa!!'
         );
-
 }
+
 header("Content-type: application/json;charset=utf-8");
 echo json_encode($data);
 ?>
