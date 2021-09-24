@@ -1,7 +1,7 @@
 <?php
 // Get all polls from database
 
-include_once 'pdo_connect';
+include_once 'pdo-connect.php';
 
 try {
     $stmt = $conn->prepare("SELECT id, topic, start, end, user_id FROM poll");
