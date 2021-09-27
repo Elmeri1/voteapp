@@ -1,9 +1,10 @@
 // Index-page js
-
+window.addEventListener('load', getPolls);
 /*
 Get all polls from db and show on page
 */
 function getPolls(){
+    console.log("haetaan dataa")
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         const data = JSON.parse(this.responseText);
@@ -15,16 +16,35 @@ function getPolls(){
 
 function showPolls(data){
 
-    const ul = document.getElementById("votesUi");
+    console.log(data)
+
+    const ul = document.getElementById("votesUl");
 
     data.forEach(poll => {
-        const newLi = document.createElement('li');
-        newLi.classList.add('list-group-item');
 
-        const liText = document.createTextNode(poll.topic);
-        newLi.appendChild(liText);
+        let start = false;
+        let end = false;
 
-        ul.appendChild(newLi);
+        if (poll.start != '0000-00-00 00:00:00'){
+            start = new Date(poll.start);
+        }
+        if (poll.end != '0000-00-00 00:00:00'){
+            end = new Date(poll.end);
+        }
+
+        console.log(start);
+        console.log(end);
+
+        if ( (start == false || start <- now)&& end == false){
+
+            const newLi = document.createElement('li');
+            newLi.classList.add('list-group-item');
+    
+            const liText = document.createTextNode(poll.topic);
+            newLi.appendChild(liText);
+    
+            ul.appendChild(newLi);
+        }
 
     });
 }
