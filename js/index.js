@@ -20,6 +20,8 @@ function showPolls(data){
 
     const ul = document.getElementById("votesUl");
 
+    const now = new Date();
+
     data.forEach(poll => {
 
         let start = false;
@@ -35,7 +37,32 @@ function showPolls(data){
         console.log(start);
         console.log(end);
 
-        if ( (start == false || start <- now)&& end == false){
+        // Show current polls
+        if ( (start == false || start <= now) && ( end == false || end >= now) ){
+
+            const newLi = document.createElement('li');
+            newLi.classList.add('list-group-item');
+    
+            const liText = document.createTextNode(poll.topic);
+            newLi.appendChild(liText);
+    
+            ul.appendChild(newLi);
+        }
+
+        // Show polls
+        if ( end < now && end != false){
+
+            const newLi = document.createElement('li');
+            newLi.classList.add('list-group-item');
+    
+            const liText = document.createTextNode(poll.topic);
+            newLi.appendChild(liText);
+    
+            ul.appendChild(newLi);
+        }
+
+        // Show future polls
+        if ( end < now && end != false){
 
             const newLi = document.createElement('li');
             newLi.classList.add('list-group-item');

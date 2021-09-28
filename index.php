@@ -20,10 +20,8 @@
   </div>
 
   <h2>Votes</h2>
+  <button onclick="showPolls()">Show old polls</button>
   <ul id="votesUl" class="list-group">
-    <li class="list-group-item">
-      Kuka on paras?
-    </li>
   </ul>
 
 </div>
