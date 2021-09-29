@@ -1,24 +1,27 @@
 // Index-page js
 window.addEventListener('load', getPolls);
+document.getElementById('votesUl').addEventListener('click', openPoll);
 /*
 Get all polls from db and show on page
 */
+
+let data = null;
+
 function getPolls(){
     console.log("haetaan dataa")
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
-        const data = JSON.parse(this.responseText);
+        data = JSON.parse(this.responseText);
         showPolls(data);
     }
     ajax.open("GET", "backend/getPolls.php");
     ajax.send();
 }
 
-function showPolls(data){
-
-    console.log(data)
+function showPolls(type = 'current'){
 
     const ul = document.getElementById("votesUl");
+    ul.innerHTML = "";
 
     const now = new Date();
 
@@ -34,44 +37,58 @@ function showPolls(data){
             end = new Date(poll.end);
         }
 
-        console.log(start);
-        console.log(end);
-
         // Show current polls
-        if ( (start == false || start <= now) && ( end == false || end >= now) ){
+        if (type == 'current') {
 
-            const newLi = document.createElement('li');
-            newLi.classList.add('list-group-item');
-    
-            const liText = document.createTextNode(poll.topic);
-            newLi.appendChild(liText);
-    
-            ul.appendChild(newLi);
+            if ( (start == false || start <= now) && ( end == false || end >= now) ){
+
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            }
+
         }
 
         // Show polls
-        if ( end < now && end != false){
+        if (type == 'old'){
+            if ( end < now && end != false){
 
-            const newLi = document.createElement('li');
-            newLi.classList.add('list-group-item');
-    
-            const liText = document.createTextNode(poll.topic);
-            newLi.appendChild(liText);
-    
-            ul.appendChild(newLi);
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+                newLi.dataset.voteid = poll.id;
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            }
         }
 
         // Show future polls
-        if ( end < now && end != false){
+        else if (type == 'future'){
 
-            const newLi = document.createElement('li');
-            newLi.classList.add('list-group-item');
-    
-            const liText = document.createTextNode(poll.topic);
-            newLi.appendChild(liText);
-    
-            ul.appendChild(newLi);
+            if ( end < now && end != false){
+
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+                newLi.dataset.voteid = poll.id;
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            }
+
         }
 
     });
+}
+
+function openPoll(event){
+    console.log(event.target.dataset.voteid);
+    window.location.href = "vote.php?id=" + event.target.dataset.voteid;
 }
