@@ -95,7 +95,7 @@ function addNewOption(event){
     input.setAttributeNode(inputType);
 
     const inputName = document.createAttribute('name');
-    inputName.value = `Option${optionCount}`;
+    inputName.value = `option${optionCount}`;
     input.setAttributeNode(inputName);
 
     const inputPlaceHolder = document.createAttribute('placeholder');

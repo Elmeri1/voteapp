@@ -63,8 +63,8 @@ try{
     // Tallenetaan kaikki vaihtoehdot
     foreach($options as $option){
         // Luodaan pdo statement
-        $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:topic, :poll_id)");
-        $stmt->bindParam(':name', $topic);
+        $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:option, :poll_id)");
+        $stmt->bindParam(':option', $option);
         $stmt->bindParam(':poll_id', $poll_id);
     
         if($stmt->execute() == false){

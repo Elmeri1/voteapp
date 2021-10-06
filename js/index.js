@@ -71,7 +71,7 @@ function showPolls(type = 'current'){
         // Show future polls
         else if (type == 'future'){
 
-            if ( end < now && end != false){
+            if ( start < now){
 
                 const newLi = document.createElement('li');
                 newLi.classList.add('list-group-item');
