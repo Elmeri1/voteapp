@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged_in'])){
 ?>
 
 <div class="jumbotron">
-    <a href="#" class="display-3">Teretulemast to VoteApp admin view</a>
+    <a href="#" class="display-3">Welcome to VoteApp admin view</a>
     <?php if (isset($_SESSION['logged_in'])): ?>
       <p>Olet kirjautunut käyttäjänä <?php echo $_SESSION['user_name']; ?></p>
     <?php endif; ?>
