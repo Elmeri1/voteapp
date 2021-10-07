@@ -32,6 +32,7 @@ if (!isset($_SESSION['logged_in'])){
     </ul>
 </div>
 
+<script src="js/index.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/common.js"></script>
 
