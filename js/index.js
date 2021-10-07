@@ -20,6 +20,8 @@ function getPolls(){
 
 function showPolls(type = 'current'){
 
+    console.log(data);
+
     const ul = document.getElementById("votesUl");
     ul.innerHTML = "";
 
@@ -37,6 +39,9 @@ function showPolls(type = 'current'){
             end = new Date(poll.end);
         }
 
+        console.log(start);
+        console.log(end);
+
         // Show current polls
         if (type == 'current') {
 
@@ -44,6 +49,7 @@ function showPolls(type = 'current'){
 
                 const newLi = document.createElement('li');
                 newLi.classList.add('list-group-item');
+                newLi.dataset.voteid = poll.id;
         
                 const liText = document.createTextNode(poll.topic);
                 newLi.appendChild(liText);
@@ -71,7 +77,7 @@ function showPolls(type = 'current'){
         // Show future polls
         else if (type == 'future'){
 
-            if ( start < now){
+            if ( start > now){
 
                 const newLi = document.createElement('li');
                 newLi.classList.add('list-group-item');
