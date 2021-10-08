@@ -21,7 +21,7 @@ function loginUser(event){
         const data = JSON.parse(this.responseText);
         console.log(data);
         if (data.hasOwnProperty('success')){
-            window.location.href = "index.php?type=success&msg=welcome";
+            window.location.href = "admin.php?type=success&msg=welcome";
             return;
         } else {
             showMessage('error','kirjautimnen epäonnistui');

@@ -24,12 +24,12 @@ if (!isset($_SESSION['logged_in'])){
     <p class="mb-0"></a>.</p>
   </div>
 
-      <h2>Votes</h2>
-      <button class="btn btn-info" onclick="showPolls('current')">show current polls</button>
-      <button class="btn btn-info" onclick="showPolls('old')">show old polls</button>
-      <button class="btn btn-info" onclick="showPolls('future')">show future polls</button>
-    <ul id="votesUl" class="list-group">
-    </ul>
+    <h2>Votes</h2>
+    <button class="btn btn-info" onclick="showPolls('old')">show current polls</button>
+    <button class="btn btn-info" onclick="showPolls('future')">show old polls</button>
+    <button class="btn btn-info" onclick="showPolls('current')">show future polls</button>
+  <ul id="votesUl" class="list-group">
+  </ul>
 </div>
 
 <script src="js/index.js"></script>
