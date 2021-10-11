@@ -1,13 +1,12 @@
 <?php session_start(); ?>
-<?php include_once 'layout/top.inc.php'; ?>
-<?php include_once 'layout/nav.inc.php'; ?>
 <?php
-
 if (!isset($_SESSION['logged_in'])){
   header('Location: index.php');
   die();
 }
 ?>
+<?php include_once 'layout/top.inc.php'; ?>
+<?php include_once 'layout/nav.inc.php'; ?>
 
 <div class="jumbotron">
     <a href="#" class="display-3">Welcome to VoteApp admin view</a>
@@ -32,7 +31,6 @@ if (!isset($_SESSION['logged_in'])){
   </ul>
 </div>
 
-<script src="js/index.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/common.js"></script>
 

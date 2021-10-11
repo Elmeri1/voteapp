@@ -5,13 +5,14 @@ const pollQueryString = window.location.search;
 const pollParams = new URLSearchParams(pollQueryString);
 
 if (pollParams.has('id')){
-    getPollData(pollParams.has('id'))
+    getPollData(pollParams.has('id'));
 }
 
 let optionCount = 0;
 
 document.getElementById('addOption').addEventListener('click', addNewOption);
 document.getElementById('deleteLastOption').addEventListener('click', deleteLastOption);
+document.forms['editPoll'].addEventListener('submit', modifyPoll);
 
 
 
@@ -45,7 +46,7 @@ function populatePollForm(data){
     })
 }
 
-// createOptionInputDic -
+// createOptionInputDiv -
 // Creates new input-field to form
 function createOptionInputDiv(count, name, id){
 
@@ -150,4 +151,27 @@ function addNewOption(event){
     document.querySelector('fieldset').appendChild(div);
     console.log(div);
 
+}
+
+function modifyPoll(event){
+    event.preventDefault();
+    console.log('save change');
+
+    // collect poll data from
+    let pollData = {};
+    pollData.id = document.forms['editpoll']['id'].value;
+    pollData.topic = document.forms['editpoll']['topic'].value;
+    pollData.start = document.forms['editpoll']['start'].value;
+    pollData.end = document.forms['editpoll']['end'].value;
+
+    const options = [];
+    const inputs = document.querySelector('input');
+
+    inputs.forEach(function(input){
+        if(input.name.indexOf('option') == 0){
+            options.push({ id: , name: input.value})
+        }
+    })
+
+    console.log(pollData);
 }

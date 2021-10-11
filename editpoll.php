@@ -24,15 +24,15 @@ if (!isset($_SESSION['logged_in'])){
         <legend>Edit Poll</legend>
         <div class="form-group">
           <input type="hidden" name ="id"
-          <label for="topic" class="form-label mt-4">Topic</label>
+          <label for="topic">Topic</label>
           <input name="topic" type="username" class="form-control" placeholder="topic">
         </div>
         <div class="form-group">
-          <label for="start" class="form-label mt-4">Start</label>
+          <label for="start">Start</label>
           <input name="start" type="date" class="form-control">
         </div>
         <div class="form-group">
-          <label for="end" class="form-label mt-4">End</label>
+          <label for="end">End</label>
           <input name="end" type="date" class="form-control">
         </div>
 

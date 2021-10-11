@@ -33,7 +33,7 @@ try{
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $result['id'];
             // onko user_name vai username
-            $_SESSION['user_name'] = $result['username'];
+            $_SESSION['username'] = $result['username'];
 
         } else {
             $data = array(

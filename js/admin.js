@@ -12,58 +12,64 @@ function getOwnPolls(){
         data = JSON.parse(this.responseText); 
         showPolls();
     }
-    ajax.open("GET", "backend/getPolls.php?show_all=1");
+    ajax.open("GET", "backend/getPolls.php");
     ajax.send();
 }
     
 function showPolls(type = 'current'){
 
+    console.log(data);
 
     const ul = document.getElementById("votesUl");
     ul.innerHTML = "";
-    
+
     const now = new Date();
+
     data.forEach(poll => {
 
         let start = false;
         let end = false;
 
         if (poll.start != '0000-00-00 00:00:00'){
-            let start = new Date(poll.start);
+            start = new Date(poll.start);
         }
         if (poll.end != '0000-00-00 00:00:00'){
-            let end = new Date(poll.end);
+            end = new Date(poll.end);
         }
 
-        // show old polls
-    if (type == 'old'){
-        if  ( end < now && end != false ){
+        console.log(start);
+        console.log(end);
 
-                createPollLi(ul, poll.id, poll.topic)
+        // Show current polls
+        if (type == 'current') {
+
+            if ( (start == false || start <= now) && ( end == false || end >= now) ){
+
+                createPollLi(ul, poll.id, poll.topic);
+
             }
 
-
-    }  else if (type == 'future'){  
-
-        if  (start > now){
-
-            createPollLi(ul, poll.topic);
-    
         }
-    }
-        
-    // show current polls
-    if (type == 'current') {
-        if ( (start == false || start <= now) && ( end == false || end >= now)  ){
 
-            createPollLi(ul, poll.id, poll.topic);
+        // Show polls
+        if (type == 'old'){
+            if ( end > now){
+
+                createPollLi(ul, poll.id, poll.topic);
+
+            }
         }
-    }
-        /*
-        <li class=list-group-item>
-        kuka on paras?
-        </li>
-        */
+
+        // Show future polls
+        else if (type == 'future'){
+
+            if ( start > now){
+
+                createPollLi(ul, poll.id, poll.topic);
+
+            }
+
+        }
 
     });
 }
@@ -82,12 +88,10 @@ function showPolls(type = 'current'){
         const deleteText = document.createTextNode('Delete Poll');
         newDeleteBtn.appendChild(deleteText);
 
-
         const newEditBtn = document.createElement('button');
         newEditBtn.dataset.action = 'edit';
         const editText = document.createTextNode('Edit Poll');
         newEditBtn.appendChild(editText);
-
 
         const liText = document.createTextNode(pollTopic);
         newLi.appendChild(liText);
@@ -123,7 +127,7 @@ function showPolls(type = 'current'){
         ajax.onload = function(){
             data = JSON.parse(this.responseText);
             console.log(data);
-            let liToDelete = document.querySelector('[data-voteid="${id}"]')
+            let liToDelete = document.querySelector(`[data-voteid="${id}"]`)
             let parent = liToDelete.parentElement;
             parent.removeChild(liToDelete);
         }
