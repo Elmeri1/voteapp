@@ -185,13 +185,20 @@ function modifyPoll(event){
 
     pollData.options = options;
 
+    // Delete options
+
     console.log(pollData);
+    pollData.todelete = toDelete;
 
     // Send data to backend
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         let data = JSON.parse(this.responseText);
-        console.log(data);
+        if (data.hasOwnPoreprty('success')){
+            window.location.href = "admin.php?type=successmsg=Poll edited"
+        } else {
+            showMessage('error', data.error);
+        }
     }  
     ajax.open("POST", "backend/modifyPoll.php", true);
     ajax.setRequestHeader("Content-Type", "application/json");
@@ -202,4 +209,15 @@ function modifyPoll(event){
 function getFieldsetClick(event){
     event.preventDefault();
     console.log(event.target)
+    let btn = event.target;
+
+    if (btn.datset.action == 'delete'){
+        console.log('delete');
+        let div = btn.parentElement;
+        let input = div.querySelector('input');
+        let fieldset = div.parentElement;
+        toDelete.push({id: input.dataset.optionid});
+        fieldset.removeChild(div);
+
+    }
 }

@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id'])){
 
 $json = file_get_contents('php://input');
 $pollData = json_decode($json);
+
 $data = array();
 
 include_once 'pdo-connect.php';
@@ -36,6 +37,7 @@ try {
     }
 
 try {
+
 // Update options table
 foreach ($pollData->options as $option){
     if(isset($option->id)){
@@ -59,6 +61,27 @@ foreach ($pollData->options as $option){
 } catch (PDOException $e){
     $data['error'] = $e->getMessage();
 }
+
+// Delete options
+
+try {
+
+    // Update options table
+    foreach ($pollData->todelete as $option){
+
+            $stmt = $conn->prepare("DELETE FROM option WHERE id = :id;");
+            $stmt->bindParam(":id", $option->id);
+    
+        if($stmt->execute() == false){
+            $data['error'] = 'Error deleting option';
+        } else {
+            $data['success'] = 'Option delete successful';
+        }
+    }
+    
+    } catch (PDOException $e){
+        $data['error'] = $e->getMessage();
+    }
 
 header("Content-type: application/json;charset=utf-8");
 echo json_encode($data);
