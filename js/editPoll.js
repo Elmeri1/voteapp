@@ -13,7 +13,7 @@ let optionCount = 0;
 document.getElementById('addOption').addEventListener('click', addNewOption);
 document.getElementById('deleteLastOption').addEventListener('click', deleteLastOption);
 document.forms['editPoll'].addEventListener('submit', modifyPoll);
-
+document.querySelector('fieldset').addEventListener('click', getFieldsetClick);
 
 
 // Get poll data from database
@@ -57,8 +57,8 @@ function createOptionInputDiv(count, name, id){
     // create new label
     const label = document.createElement('label');
     const forAttribute = document.createAttribute('for');
-    const labelText = document.createTextNode(`option${Count}`);
-    forAttribute.value = `option${Count}`;
+    const labelText = document.createTextNode(`option${count}`);
+    forAttribute.value = `option${count}`;
     label.setAttributeNode(forAttribute);
     label.appendChild(labelText);
     label.classList.add('form-label');
@@ -74,19 +74,28 @@ function createOptionInputDiv(count, name, id){
     input.setAttributeNode(inputType);
 
     const inputName = document.createAttribute('name');
-    inputName.value = `option${Count}`;
+    inputName.value = `option${count}`;
     input.setAttributeNode(inputName);
 
     const inputPlaceHolder = document.createAttribute('placeholder');
-    inputPlaceHolder.value = `option ${Count}`;
+    inputPlaceHolder.value = `option ${count}`;
     input.setAttributeNode(inputPlaceHolder);
 
     input.dataset.optionid = id;
 
     input.value = name;
+
+    // Delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.className = "btn btn-sm btn-danger float-right";
+
+    const deleteText = document.createTextNode('Delete');
+    deleteButton.appendChild(deleteText);
+    deleteButton.dataset.action = 'delete';
     
     div.appendChild(label);
     div.appendChild(input);
+    div.appendchild(deleteButton);
 
     return div;
 
@@ -164,14 +173,33 @@ function modifyPoll(event){
     pollData.start = document.forms['editpoll']['start'].value;
     pollData.end = document.forms['editpoll']['end'].value;
 
+    // Collect options
     const options = [];
-    const inputs = document.querySelector('input');
+    const inputs = document.querySelectorAll('input');
 
     inputs.forEach(function(input){
         if(input.name.indexOf('option') == 0){
-            options.push({ id: , name: input.value})
+            options.push({ id: input.dataset.optionid, name: input.value})
         }
     })
 
+    pollData.options = options;
+
     console.log(pollData);
+
+    // Send data to backend
+    let ajax = new XMLHttpRequest();
+    ajax.onload = function(){
+        let data = JSON.parse(this.responseText);
+        console.log(data);
+    }  
+    ajax.open("POST", "backend/modifyPoll.php", true);
+    ajax.setRequestHeader("Content-Type", "application/json");
+    ajax.send(JSON.stringify(pollData));
+
+}
+
+function getFieldsetClick(event){
+    event.preventDefault();
+    console.log(event.target)
 }
