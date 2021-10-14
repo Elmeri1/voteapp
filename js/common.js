@@ -21,6 +21,11 @@ function showMessage(type, msg){
         msgBox.querySelector('h4').innerHTML = "Warning";
         msgBox.classList.remove('alert-success');
         msgBox.classList.add('alert-danger');
+    } else if(type == 'error') {
+        msgBox.querySelector('h4').innerHTML = "Warning";
+        msgBox.classList.remove('alert-success');
+        msgBox.classList.remove('alert-danger');
+        msgBox.classList.add('alert-warning');
     }
 
     msgBox.querySelector('p').innerHTML = msg;

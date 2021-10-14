@@ -15,6 +15,12 @@ $id = intval($_GET['id']);
 
     <h1></h1>
 
+    <div id="msg" class="alert alert-dismissible alert-warning d-none">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4 class="alert-heading">Onnistui</h4>
+        <p class="mb-0"></a>.</p>
+    </div>
+
     <ul id="optionsUl" class="list-group">
         
     </ul>
