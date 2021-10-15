@@ -44,10 +44,23 @@ try {
         // Haetaan äänestyksen id
         $pollid = $poll['id'];
 
+        // Muodostetaan start ja end päivämääristä timestamp-tyyppiset arvot
+        $current_timestamp = time();
+        $start_timestamp = strtotime($poll['start']);
+        $end_timestamp = strtotime($poll['end']);
+
         // Selvitetään onko käyttäjä jo äänestänyt kyseistä äänestystä
         $cookie_name = "poll_$pollid";
         if (isset($_COOKIE[$cookie_name])){
             $data['warning'] = 'You already voted this poll';
+        }
+        // Jos äänestys on vanhentunut
+        else if ($end_timestamp < $current_timestamp) {
+            $data['warning'] = 'poll is out of date and no longer available for voting!';
+        }
+        // tai se ei ole vielä saatavilla
+        else if ($start_timestamp > $current_timestamp) {
+            $data['warning'] = 'poll is not yet available for voting!';
         }
     }
 
