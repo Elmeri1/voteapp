@@ -29,6 +29,13 @@
         <li class="nav-item">
           <a class="nav-link" href="newpoll.php">New poll</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="results.php">Results</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="editpoll.php">Edit poll</a>
+        </li>
+
         <?php endif; ?>
       </ul>
     </div>

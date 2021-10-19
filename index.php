@@ -7,7 +7,7 @@
 <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action active">Welcome to VoteApp</a>
     <?php if (isset($_SESSION['logged_in'])): ?>
-      <p>Olet kirjautunut käyttäjänä <?php echo $_SESSION['user_name']; ?></p>
+      <p>Olet kirjautunut käyttäjänä <?php echo $_SESSION['username']; ?></p>
     <?php endif; ?>
 </div>
 

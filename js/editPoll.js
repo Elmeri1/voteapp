@@ -5,7 +5,7 @@ const pollQueryString = window.location.search;
 const pollParams = new URLSearchParams(pollQueryString);
 
 if (pollParams.has('id')){
-    getPollData(pollParams.has('id'));
+    getPollData(pollParams.get('id'));
 }
 
 let optionCount = 0;
@@ -25,7 +25,7 @@ function getPollData(id){
         console.log(data);
         populatePollForm(data);
     }
-    ajax.open("GET", "Backend/getPoll.php?id=" + id);
+    ajax.open("GET", "backend/getPoll.php?id=" + id);
     ajax.send();
 
 }
@@ -95,7 +95,7 @@ function createOptionInputDiv(count, name, id){
     
     div.appendChild(label);
     div.appendChild(input);
-    div.appendchild(deleteButton);
+    div.appendChild(deleteButton);
 
     return div;
 
@@ -211,7 +211,7 @@ function getFieldsetClick(event){
     console.log(event.target)
     let btn = event.target;
 
-    if (btn.datset.action == 'delete'){
+    if (btn.dataset.action == 'delete'){
         console.log('delete');
         let div = btn.parentElement;
         let input = div.querySelector('input');
