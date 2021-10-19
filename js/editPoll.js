@@ -9,6 +9,7 @@ if (pollParams.has('id')){
 }
 
 let optionCount = 0;
+let toDelete = [];
 
 document.getElementById('addOption').addEventListener('click', addNewOption);
 document.getElementById('deleteLastOption').addEventListener('click', deleteLastOption);
@@ -168,10 +169,10 @@ function modifyPoll(event){
 
     // collect poll data from
     let pollData = {};
-    pollData.id = document.forms['editpoll']['id'].value;
-    pollData.topic = document.forms['editpoll']['topic'].value;
-    pollData.start = document.forms['editpoll']['start'].value;
-    pollData.end = document.forms['editpoll']['end'].value;
+    pollData.id = document.forms['editPoll']['id'].value;
+    pollData.topic = document.forms['editPoll']['topic'].value;
+    pollData.start = document.forms['editPoll']['start'].value;
+    pollData.end = document.forms['editPoll']['end'].value;
 
     // Collect options
     const options = [];
@@ -194,7 +195,7 @@ function modifyPoll(event){
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         let data = JSON.parse(this.responseText);
-        if (data.hasOwnPoreprty('success')){
+        if (data.hasOwnProperty('success')){
             window.location.href = "admin.php?type=successmsg=Poll edited"
         } else {
             showMessage('error', data.error);

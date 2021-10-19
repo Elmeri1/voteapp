@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged_in'])){
   </div>
 
 
-  <form name="editpoll">
+  <form name="editPoll">
       <fieldset>
         <legend>Edit Poll</legend>
         <div class="form-group">
