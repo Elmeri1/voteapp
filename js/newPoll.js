@@ -44,7 +44,7 @@ function createNewPoll(event){
             showMessage('error',data.error);
         }
     }
-    ajax.open("POST", "backend/CreateNewPoll.php", true);
+    ajax.open("POST", "backend/createNewPoll.php", true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  
     ajax.send(postData);
 }
