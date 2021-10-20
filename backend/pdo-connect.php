@@ -2,7 +2,7 @@
 $servername = "";
 $db_username = "root";
 $db_password = "";
-$dbname = "votedb";
+$dbname = "elmeri.vaisanen.db";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password);
